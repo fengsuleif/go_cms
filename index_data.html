@@ -1,0 +1,3 @@
+{{range .}}
+<li class="layui-box"><a href="/view?id={{.Id}}"  class="layui-text"><i class="layui-icon"></i>[{{.Author}}]{{.Title}}</a>#[<i class="layui-icon"></i><a href="/edit?id={{.Id}}"  class="layui-text">修改</a> ]</li>
+{{end}}

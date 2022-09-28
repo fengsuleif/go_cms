@@ -1,0 +1,98 @@
+<html>
+  <head>    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>添加资料</title>
+	<script charset="utf-8" src="/kindeditor/kindeditor/kindeditor-all-min.js"></script>
+	<script charset="utf-8" src="/kindeditor/kindeditor/lang/zh-CN.js"></script>
+	<link href="/kindeditor/layui/css/layui.css" rel="stylesheet" type="text/css" />
+	<script charset="utf-8" src="/kindeditor/layui/layui.js"></script>
+	<script>
+        
+		KindEditor.ready(function(K) {
+			var editor1 = K.create('textarea[name="contentx"]', {
+				cssPath : '../plugins/code/prettify.css',
+				uploadJson : '/upload',
+				 
+				 
+			});
+			
+		});
+		KindEditor.sync("#editor_id");
+	</script>
+</script>
+
+  </head>
+  <body>
+  <div class="layui-container" style="padding: 30px 0;">
+
+  <div class="" style="padding: 30px 0;">
+    
+    <blockquote class="layui-elem-quote" style="color: #666;">
+      引导页
+    </blockquote>
+    
+  </div>
+ <div class="layui-btn-container">
+  <a href="http://127.0.0.1:8080/add" class="layui-btn demo" test-active="test-form">添加文章</a>
+  <a  href="http://127.0.0.1:8080/" class="layui-btn demo" test-active="test-use">首页</a>
+</div>
+
+  <!-- 
+   普通的post表单请求，Content-Type=application/x-www-form-urlencoded
+	有文件上传的表单，Content-Type=multipart/form-data
+	-->
+
+    <form action="http://127.0.0.1:8080/update" method="post" enctype="multipart/form-data" class="layui-form">
+	<input type="hidden"  name="id" value="{{.Id}}" >
+       <input type="text" name="title" value="{{.Title}}" class="layui-input"/>
+      <input type="text"  name="author" value="{{.Author}}" class="layui-input"/>
+	  <input type="text"  name="create_at" value="{{.Time}}" class="layui-input" id="create_at"/>
+	   <input type="file" name="file" id="file" class="layui-input"  > 
+	  <textarea id="editor_id" name="contentx" style="width:700px;height:300px;">{{.Content}}</textarea> 
+      <input type="submit" class="layui-btn" />
+    </form>
+
+
+
+
+</div>
+ 
+	<script>
+
+layui.use('laydate', function(laydate){  
+  
+  //全局配置
+  laydate.set({
+    //trigger: 'focus'
+  })
+
+ 
+  
+  //单控件
+  laydate.render({
+    elem: '#create_at'
+    //,format: 'yyyy年MM月dd日'
+    ,value: new Date()
+    //,isInitValue: false
+    ,format: 'yyyy-MM-dd'
+    ,min: -7
+    //,max: 0
+    //,min: '2016-10-14'
+    //,max: -1
+    //,value: '1989年10月14日'
+    ,ready: function(date){
+      console.log(date);
+    }
+    ,done: function(value, date, endDate){
+      console.log(value, date, endDate);
+    }
+    ,change: function(value){
+      console.log(value);
+    }
+  });
+ 
+  
+});
+</script>
+  </body>
+</html>

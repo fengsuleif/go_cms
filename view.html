@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{{.Title}}</title>
+	<link href="/kindeditor/layui/css/layui.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+   <div class="layui-container" style="padding: 30px 0;">
+
+  <div class="" style="padding: 30px 0;">
+    
+    <blockquote class="layui-elem-quote" style="color: #666;">
+      引导页
+    </blockquote>
+    
+  </div>
+ <div class="layui-btn-container">
+  <a href="http://127.0.0.1:8080/add" class="layui-btn demo" test-active="test-form">添加文章</a>
+ <a  href="http://127.0.0.1:8080/" class="layui-btn demo" test-active="test-use">首页</a>
+</div>
+<fieldset class="layui-elem-field">
+  <legend>内容</legend>
+  <div class="layui-field-box">
+ <h1 class="layui-font-black">{{.Title}}</h1>
+	<Br>作者：{{.Author}}    时间：{{.Time}} <hr>
+	<p class="layui-text">{{.Content}}</p>
+  </div>
+</fieldset>
+ 
+
+</div>
+   
+
+  </body>
+</html>

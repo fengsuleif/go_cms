@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>首页</title>
+  <script charset="utf-8" src="/kindeditor/layui/layui.js"></script>
+  <link href="/kindeditor/layui/css/layui.css" rel="stylesheet" type="text/css" />
+	<script charset="utf-8" src="/kindeditor/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="layui-container" style="padding: 30px 0;">
+
+  <div class="" style="padding: 30px 0;">
+    
+    <blockquote class="layui-elem-quote" style="color: #666;">
+      引导页
+    </blockquote>
+    
+  </div>
+ <div class="layui-btn-container">
+  <a href="http://127.0.0.1:8080/add" class="layui-btn demo" test-active="test-form">添加文章</a> 
+  <a  href="http://127.0.0.1:8080/" class="layui-btn demo" test-active="test-use">首页</a>
+</div>
+
+
+<fieldset class="layui-elem-field">
+  <legend>文章列表</legend>
+  <div class="layui-field-box">
+   <form action="http://127.0.0.1:8080/search" method="post" enctype="application/x-www-form-urlencoded" class="layui-form">
+     <div class="layui-form-item">
+   
+    <div class="layui-input-inline">
+      <select name="search_type"> 
+        <option value="title" selected="">标题</option>
+		<option value="author" >作者</option>
+        <option value="content" >内容</option> 
+      </select>
+    </div>
+	
+	
+	<div class="layui-inline">
+      
+      <div class="layui-input-inline">
+        <input type="text" name="word" value="" class="layui-input"/> 
+      </div>
+	  <div class="layui-input-inline">
+        <input type="submit" class="layui-btn" />
+      </div>
+    </div>
+	
+	
+	
+  </div>
+       
+      
+    </form>
+  
+    <ul id="index">
+
+{{range .Artdata}}
+ <li class="layui-box"><a href="/view?id={{.Id}}"  class="layui-text"><i class="layui-icon"></i>[{{.Author}}]{{.Title}}</a>#[<i class="layui-icon"></i><a href="/edit?id={{.Id}}"  class="layui-text">修改</a> ]</li>
+{{end}}
+</ul>
+
+<div id="dpage"></div>
+  </div>
+</fieldset>
+
+
+
+
+</div>
+ <script>
+
+layui.use(['laypage', 'layer'], function(){
+  var laypage = layui.laypage
+  ,layer = layui.layer; 
+  
+  //不显示首页尾页
+  laypage.render({
+    elem: 'dpage'
+    ,count:  {{.Totalpage}}  
+	,groups: 10
+    ,first: false
+    ,last: false
+	,jump: function(obj,first){
+	if(!first){	
+    // $("#index").load("/jsdata/key_redis.php?index=brower&curpage="+obj.curr);
+	$("#index").load("http://127.0.0.1:8080/page?num="+obj.curr);
+	console.log(obj.curr)
+    }
+	}
+  });
+  
+
+  
+});
+</script>
+</body>
+</html>
